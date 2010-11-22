@@ -1,4 +1,4 @@
-package de.bowling;
+package de.winkler.bowling;
 
 public class Bowler {
 
