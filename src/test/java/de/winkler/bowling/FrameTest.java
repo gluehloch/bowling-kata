@@ -87,4 +87,12 @@ public class FrameTest {
         assertThat(frame.isSpare()).isFalse();
     }
 
+    @Test
+    public void testFrame_an_illegal_spare() {
+        Frame frame = new Frame();
+        frame.roll(0);
+        frame.roll(10);
+        assertThat(frame.isSpare()).isFalse();
+    }
+
 }

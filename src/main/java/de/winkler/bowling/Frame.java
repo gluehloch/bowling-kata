@@ -47,6 +47,9 @@ public class Frame {
     }
 
     public boolean isSpare() {
+        if (firstThrow == 0) {
+            return false;
+        }
         return ((firstThrow + secondThrow) == 10);
     }
 
