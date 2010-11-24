@@ -13,14 +13,23 @@ public class Bowling {
        
     }
 
-    public int score(Frame frame) {
-        int score = 0;
-        if (frame.isStrike()) {
-            int indexCurrentFrame = frames.indexOf(frame);
-            
-        }
+    public boolean isFinished() {
+        return (frames.size() == 10);
+    }
 
-        return score;
+    /**
+     * Roll the ball.
+     *
+     * @param pins Number of thrown pins.
+     */
+    public void roll(int pins) {
+        if (currentCalculationFrame == null) {
+            currentCalculationFrame = new Frame();    
+        }
+        
+        if (!currentCalculationFrame.isFinished()) {
+            currentCalculationFrame.roll(pins);
+        }
     }
 
 }

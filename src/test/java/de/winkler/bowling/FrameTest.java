@@ -11,15 +11,18 @@ public class FrameTest {
     public void testFrame_two_throws() {
         Frame frame = new Frame();
         frame.roll(5);
+        assertThat(frame.isFinished()).isFalse();
         frame.roll(3);
         assertThat(frame.getFirstThrow()).isEqualTo(5);
         assertThat(frame.getSecondThrow()).isEqualTo(3);
+        assertThat(frame.isFinished()).isTrue();
     }
 
     @Test
     public void testFrame_illegal_second_throw() {
         Frame frame = new Frame();
         frame.roll(5);
+        assertThat(frame.isFinished()).isFalse();
         try {
             frame.roll(6);
             fail("Expected an exception.");
@@ -36,6 +39,7 @@ public class FrameTest {
 
         frame.roll(5);
         assertThat(frame.getSecondThrow()).isEqualTo(5);
+        assertThat(frame.isFinished()).isTrue();
 
         try {
             frame.roll(2);
@@ -54,6 +58,7 @@ public class FrameTest {
         } catch (Exception ex) {
             // ok
         }
+        assertThat(frame.isFinished()).isTrue();
     }
 
     @Test
@@ -61,6 +66,7 @@ public class FrameTest {
         Frame frame = new Frame();
         frame.roll(10);
         assertThat(frame.isStrike()).isTrue();
+        assertThat(frame.isFinished()).isTrue();
     }
 
     @Test
@@ -69,6 +75,7 @@ public class FrameTest {
         frame.roll(5);
         frame.roll(3);
         assertThat(frame.isStrike()).isFalse();
+        assertThat(frame.isFinished()).isTrue();
     }
 
     @Test
@@ -77,6 +84,7 @@ public class FrameTest {
         frame.roll(5);
         frame.roll(5);
         assertThat(frame.isSpare()).isTrue();
+        assertThat(frame.isFinished()).isTrue();
     }
 
     @Test
@@ -85,6 +93,7 @@ public class FrameTest {
         frame.roll(5);
         frame.roll(3);
         assertThat(frame.isSpare()).isFalse();
+        assertThat(frame.isFinished()).isTrue();
     }
 
     @Test
@@ -93,6 +102,7 @@ public class FrameTest {
         frame.roll(0);
         frame.roll(10);
         assertThat(frame.isSpare()).isFalse();
+        assertThat(frame.isFinished()).isTrue();
     }
 
 }

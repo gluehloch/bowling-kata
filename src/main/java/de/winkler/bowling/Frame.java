@@ -11,19 +11,19 @@ public class Frame {
 
     public void roll(int pins) {
         if (firstThrow == -1) {
-            firstThrow(pins);
+            setFirstThrow(pins);
         } else if (secondThrow != -1) {
             throw new IllegalStateException("Only two rolls per frame!");
         } else {
-            secondThrow(pins);
+            setSecondThrow(pins);
         }
     }
 
-    private void firstThrow(int pins) {
+    private void setFirstThrow(int pins) {
         firstThrow = pins;
     }
 
-    private void secondThrow(int pins) {
+    private void setSecondThrow(int pins) {
         if (firstThrow == 10) {
             throw new IllegalStateException();
         }
@@ -56,6 +56,14 @@ public class Frame {
 
     public boolean isMiss() {
         return ((firstThrow + secondThrow) == 0);
+    }
+
+    public boolean isFinished() {
+        if (isStrike()) {
+            return true;
+        } else {
+            return ((firstThrow != -1) && (secondThrow != -1));
+        }
     }
 
 }
