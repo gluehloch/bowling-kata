@@ -4,7 +4,6 @@ public class Frame {
 
     private int firstThrow = -1;
     private int secondThrow = -1;
-    private Frame nextFrame;
     
     public Frame() {   
     }
