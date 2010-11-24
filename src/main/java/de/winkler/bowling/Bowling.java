@@ -16,6 +16,12 @@ public class Bowling {
         return ((frames.size() == 10) && (currentCalculationFrame.isFinished()));
     }
 
+    public void roll(int... pins) {
+        for (int i : pins) {
+            roll(i);            
+        }
+    }
+
     /**
      * Roll the ball.
      *
@@ -32,11 +38,32 @@ public class Bowling {
         }
         
         if (!currentCalculationFrame.isFinished()) {
+            // Finish this frame with last roll
             currentCalculationFrame.roll(pins);
         } else {
+            // Frame is open. So make your second roll.
             currentCalculationFrame = null;
             roll(pins);
         }
+    }
+
+    /**
+     * Calculate the score of the bowling game.
+     *
+     * @return The score of the bowler.
+     */
+    public int score() {
+        int result = 0;
+        for (Frame frame : frames) {
+            if (frame.isStrike()) {
+                result += 10000; // FIXME
+            } else if (frame.isSpare()) {
+                result += 1000; // FIXME
+            } else {
+                result += frame.getFirstThrow() + frame.getSecondThrow();
+            }
+        }
+        return result;
     }
 
 }
