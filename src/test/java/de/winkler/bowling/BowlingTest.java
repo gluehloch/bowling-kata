@@ -1,14 +1,38 @@
 package de.winkler.bowling;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.fest.assertions.Fail.fail;
 
 import org.junit.Test;
 
 public class BowlingTest {
 
     @Test
+    public void testBowling_with_spares() {
+        Bowling bowling = new Bowling();
+        bowling.roll(2, 8, 2, 8, 2, 8, 2, 8, 2, 8, 2, 8, 2, 8, 2, 8, 2, 8, 3, 6);
+        assertThat(bowling.isFinished()).isTrue();
+        assertThat(bowling.score()).isEqualTo(118);
+    }
+
+    @Test
     public void testBowling_with_a_spare() {
         Bowling bowling = new Bowling();
+        bowling.roll(1, 9, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1, 9, 0, 1, 1);
+        assertThat(bowling.isFinished()).isTrue();
+        assertThat(bowling.score()).isEqualTo(65);
+    }
+
+    @Test
+    public void testBowling_too_many_rolls() {
+        Bowling bowling = new Bowling();
+        try {
+            bowling.roll(1, 1, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1, 9, 0, 1, 1, 1);
+            fail("Expected an IllegalStateException.");
+        } catch (Exception ex) {
+            // ok
+        }
+        assertThat(bowling.isFinished()).isTrue();
     }
 
     @Test

@@ -4,8 +4,17 @@ public class Frame {
 
     private int firstThrow = -1;
     private int secondThrow = -1;
-    
+    private Frame nextFrame;
+
     public Frame() {   
+    }
+
+    protected Frame getNextFrame() {
+        return nextFrame;
+    }
+
+    protected void setNextFrame(Frame _nextFrame) {
+       nextFrame = _nextFrame;
     }
 
     public void roll(int pins) {

@@ -34,7 +34,7 @@ public class Bowling {
 
         if (currentCalculationFrame == null) {
             currentCalculationFrame = new Frame();
-            frames.add(currentCalculationFrame);
+            addFrame(currentCalculationFrame);
         }
         
         if (!currentCalculationFrame.isFinished()) {
@@ -45,6 +45,13 @@ public class Bowling {
             currentCalculationFrame = null;
             roll(pins);
         }
+    }
+
+    private void addFrame(Frame frame) {
+        if (!frames.isEmpty()) {
+            frames.get(frames.size() - 1).setNextFrame(frame);
+        }
+        frames.add(frame);
     }
 
     /**
@@ -58,7 +65,10 @@ public class Bowling {
             if (frame.isStrike()) {
                 result += 10000; // FIXME
             } else if (frame.isSpare()) {
-                result += 1000; // FIXME
+                result += 10;
+                if (frame.getNextFrame() != null) {
+                    result += frame.getNextFrame().getFirstThrow();
+                }
             } else {
                 result += frame.getFirstThrow() + frame.getSecondThrow();
             }
